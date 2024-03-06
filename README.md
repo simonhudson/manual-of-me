@@ -1,1 +1,1 @@
-# template-next-full-stack
+# Manual of Me

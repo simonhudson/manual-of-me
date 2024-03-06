@@ -3,20 +3,7 @@ import { httpStatusCodes } from '@/src/constants/httpStatusCodes';
 import { DeleteResult, InsertOneResult, UpdateResult, WithId } from 'mongodb';
 import type { ResponsePayload } from './types.d';
 
-const API_PATH = `/api/to-do/`;
-
-export const sendResponsePayload = (
-	response: WithId<any>[] | InsertOneResult<Document> | UpdateResult<Document> | DeleteResult,
-	res: NextApiResponse
-) => {
-	const payload: ResponsePayload = {
-		status: httpStatusCodes.OK,
-		data: response,
-	};
-
-	if (Array.isArray(response) && response.length > 0) payload.metadata = { count: response.length };
-	res.json(payload);
-};
+const API_PATH = `/api/`;
 
 const doGet = async (path: string) => {
 	const API_URL = `${process.env.API_DOMAIN}${API_PATH}`;
@@ -25,13 +12,12 @@ const doGet = async (path: string) => {
 	return data;
 };
 
-const doPut = async (path: string) => {
-	const API_URL = `${process.env.API_DOMAIN}${API_PATH}`;
-	const response = await fetch(`${API_URL}${path}`, { method: 'put' });
-	const data = await response.json();
-	return data;
-};
+// const doPut = async (path: string) => {
+// 	const API_URL = `${process.env.API_DOMAIN}${API_PATH}`;
+// 	const response = await fetch(`${API_URL}${path}`, { method: 'put' });
+// 	const data = await response.json();
+// 	return data;
+// };
 
-export const getItems = async () => doGet('items');
-export const getCategories = async () => doGet('categories');
-export const updateItem = async () => doPut('items');
+export const getPeople = async () => doGet('people');
+export const getPerson = async (slug: string) => await doGet(`people/${slug}`);

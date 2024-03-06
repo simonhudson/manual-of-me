@@ -2,9 +2,9 @@
 
 const setEnvVars = () => {
 	const returnObj = {};
-	['API_DOMAIN'].forEach((key) => {
-		returnObj[key] = process.env[key];
-	});
+	// ['API_DOMAIN'].forEach((key) => {
+	// 	returnObj[key] = process.env[key];
+	// });
 	return returnObj;
 };
 
